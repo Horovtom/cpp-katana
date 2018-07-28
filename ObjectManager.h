@@ -11,24 +11,23 @@
 #include "CluesGraphicsObject.h"
 #include "UIGraphicsObject.h"
 
-struct Coordinate{
-    int x,y;
-};
-
 class ObjectManager {
 private:
-    LogicManager* logicManager;
-    GridGraphicsObject* grid = nullptr;
-    CluesGraphicsObject* clues = nullptr;
-    UIGraphicsObject* ui = nullptr;
+    LogicManager *logicManager;
+    GridGraphicsObject *grid = nullptr;
+    CluesGraphicsObject *clues = nullptr;
+    UIGraphicsObject *ui = nullptr;
 public:
-    explicit ObjectManager(LogicManager* l);
+    explicit ObjectManager(LogicManager *l);
+
     void createGameObjects(int x, int y);
+
     void createUIObjects(int x, int y);
 
     void update();
 
     void freeResources();
+
     ~ObjectManager();
 };
 

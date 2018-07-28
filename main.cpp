@@ -103,7 +103,7 @@ void run() {
 
 int main() {
     if (!init()) {
-        std::cerr << "Failed to initialize!" << std::end;
+        std::cerr << "Failed to initialize!" << std::endl;
         end();
         return -1;
     }

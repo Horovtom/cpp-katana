@@ -7,7 +7,7 @@
 
 
 #include "LogicManager.h"
-#include "ObjectManager.h"
+#include "Coordinate.h"
 
 class CluesGraphicsObject {
 private:
