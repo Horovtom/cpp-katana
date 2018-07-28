@@ -5,12 +5,13 @@
 #ifndef KATANA_LEGEND_H
 #define KATANA_LEGEND_H
 
+
 #include <vector>
 
 class Legend {
 private:
 
-    unsigned int width, height;
+    unsigned int width, height, topMaxHeight, leftMaxWidth;
     /**
      * Ordered from left to right, from top to bottom
      */
@@ -81,6 +82,29 @@ public:
     const std::vector<unsigned int> getTopClues(unsigned int column);
     const std::vector<unsigned int> getLeftClues(unsigned int row);
 
+    unsigned int getTopHeight();
+
+    /**
+     * Updates the topMaxHeight value by parameter value
+     * @param size New height of column to be considered as maximum
+     */
+    void updateTopMax(unsigned long size);
+
+    /**
+     * Updates the leftMaxWidth value by parameter value
+     * @param size  New width of row to be considered as maximum
+     */
+    void updateLeftMax(unsigned long size);
+
+    unsigned int getLeftHeight();
+
+    unsigned int getTopWidth();
+
+    unsigned int getLeftWidth();
+
+    std::vector<bool> getTopCluesDone(unsigned int col);
+
+    std::vector<bool> getLeftCluesDone(unsigned int row);
 };
 
 

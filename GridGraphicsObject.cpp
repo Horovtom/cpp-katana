@@ -11,3 +11,15 @@ void GridGraphicsObject::updateInput() {
 void GridGraphicsObject::updateOutput() {
 //TODO: IMPLEMENT
 }
+
+GridGraphicsObject::GridGraphicsObject(int x, int y, LogicManager *l) {
+//TODO: IMPLEMENT
+}
+
+void GridGraphicsObject::freeResources() {
+//TODO: IMPLEMNET
+}
+
+GridGraphicsObject::~GridGraphicsObject() {
+//TODO: IMPLement
+}

@@ -7,3 +7,12 @@
 void LogicManager::update() {
 //TODO: IMPLEMENT
 }
+
+LogicManager::LogicManager(int w, int h) {
+//TODO: IMPLEMENT
+}
+
+bool LogicManager::Update() {
+    //TODO: IMPLEMENT
+    return false;
+}

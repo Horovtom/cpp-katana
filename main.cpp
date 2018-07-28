@@ -110,6 +110,8 @@ int main() {
 
     while(running) {
         run();
+        //FIXME: Temporary
+        break;
     }
 
     end();

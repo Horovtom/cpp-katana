@@ -11,3 +11,15 @@ void UIGraphicsObject::updateInput() {
 void UIGraphicsObject::updateOuptut() {
 //TODO: IMPLEMENT
 }
+
+UIGraphicsObject::UIGraphicsObject(int x, int y, LogicManager *l) {
+//TODO: IMPLEmEnT
+}
+
+void UIGraphicsObject::freeResources() {
+//TODO: IMPLEMENT
+}
+
+UIGraphicsObject::~UIGraphicsObject() {
+//TODO: IMPLEMENT
+}
