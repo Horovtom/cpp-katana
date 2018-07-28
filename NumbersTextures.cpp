@@ -33,7 +33,8 @@ SDL_Texture *NumbersTextures::createTexture(SDL_Renderer *pRenderer, int i) {
     }
 
     numbers.emplace_back(texture);
-    numberDimensions.emplace_back({0, 0, textSurface->w, textSurface->h});
+    SDL_Rect r = {0, 0, textSurface->w, textSurface->h};
+    numberDimensions.emplace_back(r);
 
     SDL_FreeSurface(textSurface);
     return texture;

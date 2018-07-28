@@ -6,17 +6,22 @@
 #define KATANA_LOGICMANAGER_H
 
 
+#include "Legend.h"
+
 class LogicManager {
 private:
-
+    Legend *legend;
 
 public:
-    LogicManager() = default;
-    LogicManager(int w, int h);
+    LogicManager();
 
     bool Update();
 
     void update();
+
+    Legend *getCluesRef();
+
+    ~LogicManager();
 };
 
 

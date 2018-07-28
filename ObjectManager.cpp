@@ -4,8 +4,10 @@
 
 #include "ObjectManager.h"
 
-ObjectManager::ObjectManager(LogicManager* l) {
+ObjectManager::ObjectManager(LogicManager *l, SDL_Renderer *renderer) {
     this->logicManager = l;
+    this->renderer = renderer;
+    createGameObjects(0, 0);
 }
 
 ObjectManager::~ObjectManager() {
@@ -32,7 +34,7 @@ void ObjectManager::freeResources() {
 }
 
 void ObjectManager::createGameObjects(int x, int y) {
-    clues = new CluesGraphicsObject(x,y, logicManager);
+    clues = new CluesGraphicsObject(x, y, logicManager, renderer);
     Coordinate innerPoint = clues->getInnerPoint();
     grid = new GridGraphicsObject(innerPoint.x, innerPoint.y, logicManager);
 }

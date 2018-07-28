@@ -12,8 +12,8 @@ void CluesGraphicsObject::updateInput() {
 
 void CluesGraphicsObject::updateOutput() {
     Legend *l = logicManager->getCluesRef();
-    drawTopClues(nullptr);
-
+    drawTopClues(l);
+    drawLeftClues(l);
 //TODO: IMPLEMENT
 }
 
@@ -77,18 +77,21 @@ void CluesGraphicsObject::loadSprites() {
 
 }
 
-void CluesGraphicsObject::drawCell(int x, int y, int number, bool strikeThrough = false) {
-    SDL_Rect *r = &topCells.at(x).at(y);
+void CluesGraphicsObject::drawCell(int x, int y, int number, bool top, bool strikeThrough) {
+    SDL_Rect *r = &(top ? topCells : leftCells).at(x).at(y);
 
-    SDL_SetRenderDrawColor(renderer, 0x22, 0x22, 0x00, 0x40);
+    SDL_SetRenderDrawColor(renderer, 0xAA, 0xAF, 0x00, 0x40);
     SDL_RenderFillRect(renderer, r);
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderDrawRect(renderer, r);
     SDL_Texture *texture = numbersTextures->getTexture(static_cast<unsigned char>(number));
     SDL_Rect *size = numbersTextures->getTextureSize(static_cast<unsigned char>(number));
 
-    SDL_Rect a = {static_cast<int>(r->x + r->w - size->w / 2.0), static_cast<int>(r->y + r->h - size->h / 2.0), size->w,
-                  size->h};
+    //SDL_Rect a = {static_cast<int>(r->x + r->w - (size->w / 2.0)), static_cast<int>(r->y + r->h - (size->h / 2.0)), size->w,
+    //         size->h};
+    SDL_Rect a = {static_cast<int>(r->x + (r->w / 2.0) - (size->w / 2.0)),
+                  static_cast<int>(r->y + (r->h / 2.0) - (size->h / 2.0)), size->w, size->h};
+
     SDL_RenderCopy(renderer, texture, size, &a);
 
     //TODO: IMPLEMENT StrikeThrough
@@ -101,28 +104,62 @@ void CluesGraphicsObject::drawTopClues(Legend *l) {
     for (unsigned int x = 0; x < l->getTopWidth(); ++x) {
         std::vector<bool> colDone = l->getTopCluesDone(x);
         std::vector<unsigned int> col = l->getTopClues(x);
-        for (auto y = col.size() - 1; y >= 0; --y) {
-            drawCell(x, y, col.at(y), colDone.at(y));
+        for (int y = static_cast<int>(col.size() - 1); y >= 0; --y) {
+            drawCell(x, y, col.at(y), true, colDone.at(y));
         }
     }
 
 }
 
+void CluesGraphicsObject::drawLeftClues(Legend *l) {
+    SDL_RenderSetViewport(renderer, &leftViewPort);
+
+    for (int y = 0; y < l->getLeftHeight(); ++y) {
+        std::vector<bool> rowDone = l->getLeftCluesDone(y);
+        std::vector<unsigned int> row = l->getLeftClues(y);
+
+        unsigned long size = row.size();
+        for (int x = 0; x < size; ++x) {
+            drawCell(y, x, row.at(size - x - 1), false, rowDone.at(size - x - 1));
+        }
+    }
+
+//    for (int y = 0; y < l->getLeftHeight(); ++y) {
+//        std::vector<bool> rowDone = l->getLeftCluesDone(y);
+//        std::vector<unsigned int> row = l->getLeftClues(y);
+//        for (int x = row.size() - 1; x >= 0; --x) {
+//            drawCell(x,y,row.at(x), false, rowDone.at(x));
+//        }
+//    }
+}
+
 void CluesGraphicsObject::createCells() {
+    SDL_Rect r{};
     for (int x = 0; x < topViewPort.w; x += cellSize) {
         std::vector<SDL_Rect> n;
-        for (int y = topViewPort.h; y > 0; y -= cellSize) {
-            n.emplace_back({x, y, cellSize, cellSize});
+        for (int y = topViewPort.h - cellSize; y >= 0; y -= cellSize) {
+            r = {x, y, cellSize, cellSize};
+            n.emplace_back(r);
         }
         topCells.emplace_back(n);
     }
 
-    for (int x = 0; x < leftViewPort.w; x += cellSize) {
+    for (int y = 0; y < leftViewPort.h; y += cellSize) {
         std::vector<SDL_Rect> n;
-        for (int y = leftViewPort.h; y > 0; y -= cellSize) {
-            n.emplace_back({y, x, cellSize, cellSize});
+        for (int x = leftViewPort.w - cellSize; x >= 0; x -= cellSize) {
+            r = {x, y, cellSize, cellSize};
+            n.emplace_back(r);
         }
         leftCells.emplace_back(n);
     }
+//
+//    for (int x = 0; x < leftViewPort.w; x += cellSize) {
+//        std::vector<SDL_Rect> n;
+//        for (int y = leftViewPort.h; y > 0; y -= cellSize) {
+//             r = {y, x, cellSize, cellSize};
+//            n.emplace_back(r);
+//        }
+//        leftCells.emplace_back(n);
+//    }
 }
 

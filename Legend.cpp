@@ -27,6 +27,7 @@ void Legend::setTopLegend(unsigned int col, unsigned int rowInCol, unsigned int 
     std::vector<unsigned int> *clues = &topLegend.at(col);
     if ((*clues).size() <= rowInCol) {
         (*clues).emplace_back(val);
+        topLegendDone.at(col).emplace_back(false);
         updateTopMax((*clues).size());
     } else {
         (*clues).at(rowInCol) = val;
@@ -37,6 +38,7 @@ void Legend::setLeftLegend(unsigned int row, unsigned int colInRow, unsigned int
     std::vector<unsigned int> *clues = &leftLegend.at(row);
     if ((*clues).size() <= colInRow) {
         (*clues).emplace_back(val);
+        leftLegendDone.at(row).emplace_back(false);
         updateLeftMax((*clues).size());
     } else {
         (*clues).at(colInRow) = val;
@@ -46,11 +48,13 @@ void Legend::setLeftLegend(unsigned int row, unsigned int colInRow, unsigned int
 
 void Legend::pushTopLegend(unsigned int col, unsigned int val) {
     topLegend.at(col).emplace_back(val);
+    topLegendDone.at(col).emplace_back(false);
     updateTopMax(topLegend.at(col).size());
 }
 
 void Legend::pushLeftLegend(unsigned int row, unsigned int val) {
     leftLegend.at(row).emplace_back(val);
+    leftLegendDone.at(row).emplace_back(false);
     updateLeftMax(leftLegend.at(row).size());
 }
 
@@ -65,16 +69,22 @@ unsigned int Legend::getLeftRowLength(unsigned int row) {
 void Legend::insertTopLegend(unsigned int col, unsigned int rowInCol, unsigned int val) {
     auto it = topLegend.at(col).begin();
     it += rowInCol;
+    auto itDone = topLegendDone.at(col).begin();
+    itDone += rowInCol;
 
     topLegend.at(col).emplace(it, val);
+    topLegendDone.at(col).emplace(itDone, val);
     updateTopMax(topLegend.at(col).size());
 }
 
 void Legend::insertLeftLegend(unsigned int row, unsigned int colInRow, unsigned int val) {
     auto it = leftLegend.at(row).begin();
     it += colInRow;
+    auto itDone = leftLegendDone.at(row).begin();
+    itDone += colInRow;
 
     leftLegend.at(row).emplace(it, val);
+    leftLegendDone.at(row).emplace(itDone, val);
     updateLeftMax(leftLegend.at(row).size());
 }
 

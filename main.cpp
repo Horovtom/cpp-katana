@@ -108,11 +108,20 @@ int main() {
         return -1;
     }
 
-    while(running) {
+
+    logicManager = new LogicManager();
+    objectManager = new ObjectManager(logicManager, gRenderer);
+
+    for (int z = 0; z < 2; ++z) {
         run();
-        //FIXME: Temporary
-        break;
     }
+    /*
+      while(running) {
+          run();
+          //FIXME: Temporary
+          break;
+      }
+  */
 
     end();
     return 0;

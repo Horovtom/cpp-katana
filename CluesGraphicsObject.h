@@ -6,7 +6,7 @@
 #define KATANA_LEGENDGRAPHICSOBJECT_H
 
 #define CELL_SPRITE "sprites/square.png"
-#define USED_FONT "fonts/Anonymous.ttf"
+#define USED_FONT "/home/lactosis/Documents/Programming/C++/katana/fonts/Anonymous.ttf"
 
 
 #include <SDL_ttf.h>
@@ -66,11 +66,13 @@ public:
     [[deprecated]]
     void loadSprites();
 
-    void drawCell(int x, int y, int number, bool strikeThrough = false);
+    void drawCell(int x, int y, int number, bool top, bool strikeThrough = false);
 
     void drawTopClues(Legend *l);
 
     void createCells();
+
+    void drawLeftClues(Legend *pLegend);
 };
 
 

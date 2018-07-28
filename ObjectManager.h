@@ -17,8 +17,9 @@ private:
     GridGraphicsObject *grid = nullptr;
     CluesGraphicsObject *clues = nullptr;
     UIGraphicsObject *ui = nullptr;
+    SDL_Renderer *renderer;
 public:
-    explicit ObjectManager(LogicManager *l);
+    explicit ObjectManager(LogicManager *l, SDL_Renderer *renderer);
 
     void createGameObjects(int x, int y);
 
