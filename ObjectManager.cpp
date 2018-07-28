@@ -7,7 +7,7 @@
 ObjectManager::ObjectManager(LogicManager *l, SDL_Renderer *renderer) {
     this->logicManager = l;
     this->renderer = renderer;
-    createGameObjects(0, 0);
+    createGameObjects(5, 5);
 }
 
 ObjectManager::~ObjectManager() {

@@ -43,8 +43,7 @@ CluesGraphicsObject::~CluesGraphicsObject() {
 }
 
 Coordinate CluesGraphicsObject::getInnerPoint() {
-    //TODO: IMPLEMENT
-    return Coordinate();
+    return {x + static_cast<int>(leftWidth), y + static_cast<int>(topHeight)};
 }
 
 void CluesGraphicsObject::calculateDimensions() {
@@ -67,7 +66,7 @@ void CluesGraphicsObject::calculateViewPortSize() {
     topViewPort.w = topWidth;
 
     leftViewPort.x = x;
-    leftViewPort.y = topHeight;
+    leftViewPort.y = y + topHeight;
     leftViewPort.w = leftWidth;
     leftViewPort.h = leftHeight;
 }
@@ -77,7 +76,7 @@ void CluesGraphicsObject::loadSprites() {
 
 }
 
-void CluesGraphicsObject::drawCell(int x, int y, int number, bool top, bool strikeThrough) {
+void CluesGraphicsObject::drawCell(unsigned long x, unsigned long y, int number, bool top, bool strikeThrough) {
     SDL_Rect *r = &(top ? topCells : leftCells).at(x).at(y);
 
     SDL_SetRenderDrawColor(renderer, 0xAA, 0xAF, 0x00, 0x40);
@@ -87,8 +86,6 @@ void CluesGraphicsObject::drawCell(int x, int y, int number, bool top, bool stri
     SDL_Texture *texture = numbersTextures->getTexture(static_cast<unsigned char>(number));
     SDL_Rect *size = numbersTextures->getTextureSize(static_cast<unsigned char>(number));
 
-    //SDL_Rect a = {static_cast<int>(r->x + r->w - (size->w / 2.0)), static_cast<int>(r->y + r->h - (size->h / 2.0)), size->w,
-    //         size->h};
     SDL_Rect a = {static_cast<int>(r->x + (r->w / 2.0) - (size->w / 2.0)),
                   static_cast<int>(r->y + (r->h / 2.0) - (size->h / 2.0)), size->w, size->h};
 
@@ -104,33 +101,24 @@ void CluesGraphicsObject::drawTopClues(Legend *l) {
     for (unsigned int x = 0; x < l->getTopWidth(); ++x) {
         std::vector<bool> colDone = l->getTopCluesDone(x);
         std::vector<unsigned int> col = l->getTopClues(x);
-        for (int y = static_cast<int>(col.size() - 1); y >= 0; --y) {
+        for (unsigned long y = col.size() - 1; y >= 0; --y) {
             drawCell(x, y, col.at(y), true, colDone.at(y));
         }
     }
-
 }
 
 void CluesGraphicsObject::drawLeftClues(Legend *l) {
     SDL_RenderSetViewport(renderer, &leftViewPort);
 
-    for (int y = 0; y < l->getLeftHeight(); ++y) {
+    for (unsigned int y = 0; y < l->getLeftHeight(); ++y) {
         std::vector<bool> rowDone = l->getLeftCluesDone(y);
         std::vector<unsigned int> row = l->getLeftClues(y);
 
         unsigned long size = row.size();
-        for (int x = 0; x < size; ++x) {
+        for (unsigned int x = 0; x < size; ++x) {
             drawCell(y, x, row.at(size - x - 1), false, rowDone.at(size - x - 1));
         }
     }
-
-//    for (int y = 0; y < l->getLeftHeight(); ++y) {
-//        std::vector<bool> rowDone = l->getLeftCluesDone(y);
-//        std::vector<unsigned int> row = l->getLeftClues(y);
-//        for (int x = row.size() - 1; x >= 0; --x) {
-//            drawCell(x,y,row.at(x), false, rowDone.at(x));
-//        }
-//    }
 }
 
 void CluesGraphicsObject::createCells() {
@@ -152,14 +140,5 @@ void CluesGraphicsObject::createCells() {
         }
         leftCells.emplace_back(n);
     }
-//
-//    for (int x = 0; x < leftViewPort.w; x += cellSize) {
-//        std::vector<SDL_Rect> n;
-//        for (int y = leftViewPort.h; y > 0; y -= cellSize) {
-//             r = {y, x, cellSize, cellSize};
-//            n.emplace_back(r);
-//        }
-//        leftCells.emplace_back(n);
-//    }
 }
 

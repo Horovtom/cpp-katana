@@ -39,7 +39,7 @@ private:
     /**
      * CellSize in pixels
      */
-    const unsigned int cellSize = 34;
+    const int cellSize = 34;
 public:
     CluesGraphicsObject(int x, int y, LogicManager *l, SDL_Renderer *renderer);
 
@@ -66,7 +66,7 @@ public:
     [[deprecated]]
     void loadSprites();
 
-    void drawCell(int x, int y, int number, bool top, bool strikeThrough = false);
+    void drawCell(unsigned long x, unsigned long y, int number, bool top, bool strikeThrough = false);
 
     void drawTopClues(Legend *l);
 

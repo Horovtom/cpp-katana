@@ -16,9 +16,11 @@ void end();
 
 SDL_Window *gWindow = nullptr;
 SDL_Renderer *gRenderer = nullptr;
-ObjectManager * objectManager;
-LogicManager * logicManager;
+ObjectManager *objectManager;
+LogicManager *logicManager;
 bool running = true;
+//Event handler
+SDL_Event e;
 
 bool init() {
     //Initialize SDL
@@ -41,21 +43,19 @@ bool init() {
     }
 
     //Create renderer for window
-    gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-    if( gRenderer == nullptr)
-    {
-        std::cerr << "Renderer could not be created! SDL Error: " << SDL_GetError() <<std::endl;
+    gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    if (gRenderer == nullptr) {
+        std::cerr << "Renderer could not be created! SDL Error: " << SDL_GetError() << std::endl;
         return false;
     }
 
     //Initialize renderer color
-    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
     //Initialize PNG loading
     int imgFlags = IMG_INIT_PNG;
-    if( !( IMG_Init( imgFlags ) & imgFlags ) )
-    {
-        std::cerr << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() <<std::endl;
+    if (!(IMG_Init(imgFlags) & imgFlags)) {
+        std::cerr << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std::endl;
         return false;
     }
 
@@ -70,14 +70,14 @@ bool init() {
 
 void end() {
     if (objectManager != nullptr) objectManager->freeResources();
-    delete(objectManager);
+    delete (objectManager);
     objectManager = nullptr;
-    delete(logicManager);
+    delete (logicManager);
     logicManager = nullptr;
 
     //Destroy window
-    SDL_DestroyRenderer( gRenderer );
-    SDL_DestroyWindow( gWindow );
+    SDL_DestroyRenderer(gRenderer);
+    SDL_DestroyWindow(gWindow);
     gWindow = nullptr;
     gRenderer = nullptr;
 
@@ -91,14 +91,22 @@ void run() {
     //POSS: This might cause issues because of the order of operation
 
     //Clear screen
-    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-    SDL_RenderClear( gRenderer );
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
 
     if (objectManager != nullptr) objectManager->update();
     if (logicManager != nullptr) logicManager->update();
 
     //Update screen
-    SDL_RenderPresent( gRenderer );
+    SDL_RenderPresent(gRenderer);
+
+    //Handle events on queue
+    while (SDL_PollEvent(&e) != 0) {
+        //User requests quit
+        if (e.type == SDL_QUIT) {
+            running = false;
+        }
+    }
 }
 
 int main() {
@@ -112,16 +120,14 @@ int main() {
     logicManager = new LogicManager();
     objectManager = new ObjectManager(logicManager, gRenderer);
 
-    for (int z = 0; z < 2; ++z) {
+//    for (int z = 0; z < 2; ++z) {
+//        run();
+//    }
+
+    while (running) {
         run();
     }
-    /*
-      while(running) {
-          run();
-          //FIXME: Temporary
-          break;
-      }
-  */
+
 
     end();
     return 0;
