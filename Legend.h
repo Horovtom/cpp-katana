@@ -11,7 +11,7 @@
 class Legend {
 private:
 
-    unsigned int width, height, topMaxHeight, leftMaxWidth;
+    unsigned int width, height, topMaxHeight = 0, leftMaxWidth = 0;
     /**
      * Ordered from left to right, from top to bottom
      */

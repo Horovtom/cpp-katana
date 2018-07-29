@@ -19,16 +19,19 @@ void ObjectManager::freeResources() {
 
     if (grid != nullptr) {
         grid->freeResources();
+        delete grid;
         grid = nullptr;
     }
 
     if (clues != nullptr) {
         clues->freeResources();
+        delete clues;
         clues = nullptr;
     }
 
     if (ui != nullptr) {
         ui->freeResources();
+        delete ui;
         ui = nullptr;
     }
 }

@@ -27,6 +27,7 @@ Legend *LogicManager::getCluesRef() {
 
 LogicManager::~LogicManager() {
     delete legend;
+    delete grid;
 }
 
 Grid *LogicManager::getGridRef() {

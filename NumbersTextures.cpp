@@ -45,6 +45,9 @@ NumbersTextures::~NumbersTextures() {
 }
 
 void NumbersTextures::freeResources() {
+    if (fontUsed != nullptr) TTF_CloseFont(fontUsed);
+    fontUsed = nullptr;
+
     for (auto number : numbers) {
         SDL_DestroyTexture(number);
     }
