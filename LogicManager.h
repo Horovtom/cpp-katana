@@ -7,10 +7,12 @@
 
 
 #include "Legend.h"
+#include "Grid.h"
 
 class LogicManager {
 private:
     Legend *legend;
+    Grid *grid;
 
 public:
     LogicManager();
@@ -21,7 +23,13 @@ public:
 
     Legend *getCluesRef();
 
+    Grid *getGridRef();
+
     ~LogicManager();
+
+    void createSampleLegend();
+
+    void createSampleGrid();
 };
 
 

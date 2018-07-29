@@ -6,6 +6,7 @@
 #include <SDL_ttf.h>
 #include <iostream>
 #include "ObjectManager.h"
+#include "Timer.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -120,12 +121,17 @@ int main() {
     logicManager = new LogicManager();
     objectManager = new ObjectManager(logicManager, gRenderer);
 
-//    for (int z = 0; z < 2; ++z) {
-//        run();
-//    }
+    Timer fpsTimer;
+
+    int frames = 0;
+    fpsTimer.start();
 
     while (running) {
         run();
+        frames++;
+        float avgFPS = frames / (fpsTimer.getTicks() / 1000.f);
+        if (avgFPS > 2000000) avgFPS = 0;
+        if (frames % 100 == 0) std::cout << avgFPS << std::endl;
     }
 
 

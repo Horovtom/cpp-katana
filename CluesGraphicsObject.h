@@ -5,7 +5,7 @@
 #ifndef KATANA_LEGENDGRAPHICSOBJECT_H
 #define KATANA_LEGENDGRAPHICSOBJECT_H
 
-#define CELL_SPRITE "sprites/square.png"
+#define CELL_SPRITE "/home/lactosis/Documents/Programming/C++/katana/sprites/square.png"
 #define USED_FONT "/home/lactosis/Documents/Programming/C++/katana/fonts/Anonymous.ttf"
 
 
@@ -39,9 +39,9 @@ private:
     /**
      * CellSize in pixels
      */
-    const int cellSize = 34;
+    int cellSize;
 public:
-    CluesGraphicsObject(int x, int y, LogicManager *l, SDL_Renderer *renderer);
+    CluesGraphicsObject(int x, int y, LogicManager *l, SDL_Renderer *renderer, int cellSize = 34);
 
     void freeResources();
 

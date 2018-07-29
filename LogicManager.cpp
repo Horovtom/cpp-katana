@@ -9,21 +9,9 @@ void LogicManager::update() {
 }
 
 LogicManager::LogicManager() {
-    legend = new Legend(2, 3);
-    legend->pushTopLegend(0, 2);
-    legend->pushTopLegend(0, 4);
-    legend->pushTopLegend(0, 3);
+    createSampleLegend();
+    createSampleGrid();
 
-    legend->pushTopLegend(1, 5);
-    legend->pushTopLegend(1, 1);
-
-    legend->pushLeftLegend(0, 3);
-    legend->pushLeftLegend(0, 1);
-    legend->pushLeftLegend(0, 2);
-    legend->pushLeftLegend(0, 4);
-
-    legend->pushLeftLegend(2, 9);
-    legend->pushLeftLegend(2, 13);
 
     //TODO: IMPLEMENT
 }
@@ -39,4 +27,35 @@ Legend *LogicManager::getCluesRef() {
 
 LogicManager::~LogicManager() {
     delete legend;
+}
+
+Grid *LogicManager::getGridRef() {
+    return grid;
+}
+
+void LogicManager::createSampleLegend() {
+    legend = new Legend(2, 3);
+    legend->pushTopLegend(0, 2);
+    legend->pushTopLegend(0, 4);
+    legend->pushTopLegend(0, 3);
+
+    legend->pushTopLegend(1, 5);
+    legend->pushTopLegend(1, 1);
+
+    legend->pushLeftLegend(0, 3);
+    legend->pushLeftLegend(0, 1);
+    legend->pushLeftLegend(0, 2);
+    legend->pushLeftLegend(0, 4);
+
+    legend->pushLeftLegend(2, 9);
+    legend->pushLeftLegend(2, 13);
+}
+
+void LogicManager::createSampleGrid() {
+    grid = new Grid(2, 3);
+
+    grid->setCell(0, 0, BLACK);
+    grid->setCell(0, 1, BLACK);
+    grid->setCell(0, 2, CROSS);
+    grid->setCell(1, 1, DOT);
 }

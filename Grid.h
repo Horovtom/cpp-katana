@@ -20,8 +20,10 @@ public:
     Grid(unsigned int, unsigned int);
     void setCell(unsigned int, unsigned int, GridCell);
     GridCell getCell(unsigned int, unsigned int);
-    unsigned int getSizeX() {return sizeX;}
-    unsigned int getSizeY() {return sizeY;}
+
+    unsigned int getWidth() { return sizeX; }
+
+    unsigned int getHeight() { return sizeY; }
 };
 
 

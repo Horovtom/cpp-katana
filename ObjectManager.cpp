@@ -36,7 +36,7 @@ void ObjectManager::freeResources() {
 void ObjectManager::createGameObjects(int x, int y) {
     clues = new CluesGraphicsObject(x, y, logicManager, renderer);
     Coordinate innerPoint = clues->getInnerPoint();
-    grid = new GridGraphicsObject(innerPoint.x, innerPoint.y, logicManager);
+    grid = new GridGraphicsObject(innerPoint.x, innerPoint.y, logicManager, renderer);
 }
 
 void ObjectManager::createUIObjects(int x, int y) {

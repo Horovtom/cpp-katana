@@ -14,7 +14,13 @@ string(STRIP ${SDL2_INCLUDE_DIRS} SDL2_INCLUDE_DIRS)
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
 
 
-add_executable(UnitTest main.cpp Grid.cpp Grid.h Legend.cpp Legend.h ObjectManager.cpp ObjectManager.h LogicManager.cpp LogicManager.h CluesGraphicsObject.cpp CluesGraphicsObject.h UIGraphicsObject.cpp UIGraphicsObject.h GridGraphicsObject.cpp GridGraphicsObject.h LTexture.cpp LTexture.h Coordinate.cpp Coordinate.h)
+add_executable(UnitTest main.cpp Grid.cpp Grid.h Legend.cpp Legend.h ObjectManager.cpp ObjectManager.h
+        LogicManager.cpp LogicManager.h CluesGraphicsObject.cpp CluesGraphicsObject.h UIGraphicsObject.cpp
+        UIGraphicsObject.h GridGraphicsObject.cpp GridGraphicsObject.h LTexture.cpp LTexture.h Coordinate.cpp
+        Coordinate.h)
 target_link_libraries(UnitTest ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
-add_executable(Katana main.cpp Grid.cpp Grid.h Legend.cpp Legend.h ObjectManager.cpp ObjectManager.h LogicManager.cpp LogicManager.h CluesGraphicsObject.cpp CluesGraphicsObject.h UIGraphicsObject.cpp UIGraphicsObject.h GridGraphicsObject.cpp GridGraphicsObject.h LTexture.cpp LTexture.h Coordinate.cpp Coordinate.h NumbersTextures.cpp NumbersTextures.h)
+add_executable(Katana main.cpp Grid.cpp Grid.h Legend.cpp Legend.h ObjectManager.cpp ObjectManager.h
+        LogicManager.cpp LogicManager.h CluesGraphicsObject.cpp CluesGraphicsObject.h UIGraphicsObject.cpp
+        UIGraphicsObject.h GridGraphicsObject.cpp GridGraphicsObject.h LTexture.cpp LTexture.h Coordinate.cpp
+        Coordinate.h NumbersTextures.cpp NumbersTextures.h Timer.cpp Timer.h)
 target_link_libraries(Katana ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
