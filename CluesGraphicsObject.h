@@ -19,7 +19,10 @@
 class CluesGraphicsObject {
 private:
     LogicManager *logicManager;
+    //Coordinates of the top left corner
     int x, y;
+
+    //Pixel Sizes in the respective directions
     unsigned int topWidth, topHeight, leftWidth, leftHeight;
 
     //region Graphics
@@ -73,6 +76,12 @@ public:
     void createCells();
 
     void drawLeftClues(Legend *pLegend);
+
+    bool mouseDown(int x, int y);
+
+    void topCluesClick(int x, int y);
+
+    void leftCluesClick(int x, int y);
 };
 
 

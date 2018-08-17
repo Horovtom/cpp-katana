@@ -103,3 +103,24 @@ void GridGraphicsObject::freeResources() {
 GridGraphicsObject::~GridGraphicsObject() {
     freeResources();
 }
+
+bool GridGraphicsObject::mouseDown(int x, int y) {
+    if (x < this->x || y < this->y || x > this->x + cellSize * widthCells ||
+        y > this->y + cellSize * heightCells)
+        return false;
+
+    // These are the cell coordinates of the clicked cell:
+    int cellX, cellY;
+
+    cellX = x - this->x;
+    cellX /= cellSize;
+    cellY = y - this->y;
+    cellY /= cellSize;
+    clickedOnCell(cellX, cellY);
+
+    return true;
+}
+
+void GridGraphicsObject::clickedOnCell(int x, int y) {
+    std::cout << "User clicked on grid cell: " << x << "," << y << std::endl;
+}

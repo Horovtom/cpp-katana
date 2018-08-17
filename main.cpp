@@ -88,6 +88,15 @@ void end() {
     SDL_Quit();
 }
 
+void handleMouse(SDL_Event *e) {
+    if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+
+        if (objectManager != nullptr) objectManager->mouseDown(x, y);
+    }
+}
+
 void run() {
     //POSS: This might cause issues because of the order of operation
 
@@ -107,6 +116,9 @@ void run() {
         if (e.type == SDL_QUIT) {
             running = false;
         }
+
+        //Handle mouse clicks
+        handleMouse(&e);
     }
 }
 

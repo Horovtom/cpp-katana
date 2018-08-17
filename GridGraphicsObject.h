@@ -10,10 +10,15 @@
 
 class GridGraphicsObject {
 private:
+    /**
+     * Position of the top left corner of this grid object
+     */
     int x, y;
 
-    unsigned int widthCells;
-    unsigned int heightCells;
+    /**
+     * Number of cells in respective directions
+     */
+    unsigned int widthCells, heightCells;
 
     std::vector<std::vector<SDL_Rect>> cells;
 
@@ -46,6 +51,10 @@ public:
     void drawGrid(Grid *pGrid);
 
     void drawCell(int x, int y, GridCell type);
+
+    bool mouseDown(int x, int y);
+
+    void clickedOnCell(int x, int y);
 };
 
 

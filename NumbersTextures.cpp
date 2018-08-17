@@ -48,11 +48,17 @@ void NumbersTextures::freeResources() {
     if (fontUsed != nullptr) TTF_CloseFont(fontUsed);
     fontUsed = nullptr;
 
-    for (auto number : numbers) {
-        SDL_DestroyTexture(number);
+    if (!numbers.empty()) {
+        while (!numbers.empty()) {
+            SDL_Texture *t = numbers.at(numbers.size() - 1);
+            if (t != nullptr) {
+                SDL_DestroyTexture(numbers.at(numbers.size() - 1));
+            }
+            numbers.pop_back();
+        }
     }
 
-    numbers.clear();
+    //numbers.clear();
 }
 
 SDL_Texture *NumbersTextures::getTexture(unsigned char i) {

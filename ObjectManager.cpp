@@ -18,19 +18,19 @@ void ObjectManager::freeResources() {
     logicManager = nullptr;
 
     if (grid != nullptr) {
-        grid->freeResources();
+        //grid->freeResources();
         delete grid;
         grid = nullptr;
     }
 
     if (clues != nullptr) {
-        clues->freeResources();
+        //clues->freeResources();
         delete clues;
         clues = nullptr;
     }
 
     if (ui != nullptr) {
-        ui->freeResources();
+        //ui->freeResources();
         delete ui;
         ui = nullptr;
     }
@@ -38,7 +38,7 @@ void ObjectManager::freeResources() {
 
 void ObjectManager::createGameObjects(int x, int y) {
     clues = new CluesGraphicsObject(x, y, logicManager, renderer);
-    Coordinate innerPoint = clues->getInnerPoint();
+    innerPoint = clues->getInnerPoint();
     grid = new GridGraphicsObject(innerPoint.x, innerPoint.y, logicManager, renderer);
 }
 
@@ -54,4 +54,11 @@ void ObjectManager::update() {
     grid->updateOutput();
     clues->updateOutput();
     ui->updateOuptut();
+}
+
+void ObjectManager::mouseDown(int x, int y) {
+    if (ui->mouseDown(x, y)) return;
+    if (grid->mouseDown(x, y)) return;
+    if (clues->mouseDown(x, y)) return;
+
 }

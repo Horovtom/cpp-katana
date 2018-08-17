@@ -20,6 +20,8 @@ public:
     void updateInput();
 
     void updateOuptut();
+
+    bool mouseDown(int x, int y);
 };
 
 

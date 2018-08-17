@@ -137,3 +137,57 @@ void CluesGraphicsObject::drawLeftClues(Legend *l) {
     }
 }
 
+bool CluesGraphicsObject::mouseDown(int x, int y) {
+    //These are cell coordinates of where the hell we clicked
+    int cellX, cellY;
+
+    //Top left corner check
+    if (x < this->x || y < this->y) return false;
+    //In between check
+    if (x < this->x + leftWidth && y < this->y + topHeight) return false;
+
+    //Inner Check
+    if (x < this->x + leftWidth && y < this->y + leftHeight + topHeight) {
+        //It was in the left clues:
+        cellX = x - this->x;
+        cellY = y - this->y - topHeight;
+        cellX /= cellSize;
+        cellY /= cellSize;
+
+        leftCluesClick(cellX, cellY);
+        //TODO: IMPLEMENT
+    } else if (x < this->x + topWidth + leftWidth && y < this->y + topHeight) {
+        //It was in the top clues:
+
+        cellX = x - this->x - leftWidth;
+        cellY = y - this->y;
+        cellX /= cellSize;
+        cellY /= cellSize;
+
+        topCluesClick(cellX, cellY);
+    } else {
+        //It has to be outside!
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Starting from top left corner of clues
+ */
+void CluesGraphicsObject::topCluesClick(int x, int y) {
+    std::cout << "Captured click on top clues: " << x << ", " << y << std::endl;
+    //TODO: IMPLEMENT
+}
+
+/**
+ * Starting from top left corner of clues
+ * @param x
+ * @param y
+ */
+void CluesGraphicsObject::leftCluesClick(int x, int y) {
+    std::cout << "Captured click on left clues: " << x << ", " << y << std::endl;
+    //TODO: IMPLEMENT
+}
+

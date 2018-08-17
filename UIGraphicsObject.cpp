@@ -23,3 +23,8 @@ void UIGraphicsObject::freeResources() {
 UIGraphicsObject::~UIGraphicsObject() {
 //TODO: IMPLEMENT
 }
+
+bool UIGraphicsObject::mouseDown(int x, int y) {
+    //TODO: IMPLEMENT
+    return false;
+}

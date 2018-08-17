@@ -18,6 +18,7 @@ private:
     CluesGraphicsObject *clues = nullptr;
     UIGraphicsObject *ui = nullptr;
     SDL_Renderer *renderer;
+    Coordinate innerPoint;
 public:
     explicit ObjectManager(LogicManager *l, SDL_Renderer *renderer);
 
@@ -30,6 +31,8 @@ public:
     void freeResources();
 
     ~ObjectManager();
+
+    void mouseDown(int x, int y);
 };
 
 
