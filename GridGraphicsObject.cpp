@@ -68,32 +68,51 @@ void GridGraphicsObject::drawGrid(Grid *pGrid) {
 }
 
 void GridGraphicsObject::drawCell(int x, int y, GridCell type) {
-    switch (type) {
-        case BLANK:
-            SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-            break;
-        case BLACK:
-            SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
-            break;
-        case CROSS:
-            //TODO: IMPLEMENT ACTUAL CROSS
-            SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
-            break;
-        case DOT:
-            //TODO: IMPLEMENT ACTUAL DOT
-            SDL_SetRenderDrawColor(renderer, 0x00, 0xFF, 0x00, 0xFF);
-            break;
-        default:
-            std::cerr << "GridGraphicsObject::drawCell() Unknown celltype: " << type << std::endl;
+    SDL_Rect *r = &cells.at(x).at(y);
+    if (type == BLACK) {
+        //Set color to black
+        SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+        //Draw filled square
+        SDL_RenderFillRect(renderer, r);
+
+    } else if (type == CROSS) {
+        //Set color to black
+        SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+        int x1, x2, y1, y2;
+
+        //Calculate first line coords:
+        auto offset = static_cast<int>(cellSize / 5.0);
+        //TODO: Cache the result somehow so we do not have to calculate this every frame
+        x1 = r->x + offset;
+        y1 = r->y + offset;
+        x2 = r->x + r->w - offset;
+        y2 = r->y + r->h - offset;
+
+        thickLineRGBA(renderer, x1, y1, x2, y2, 2, 0x00, 0x00, 0x00, 0xFF);
+        thickLineRGBA(renderer, x1, y2, x2, y1, 2, 0x00, 0x00, 0x00, 0xFF);
+
+    } else if (type == DOT) {
+        //Set color to black
+        SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+
+        filledEllipseRGBA(renderer, static_cast<Sint16>(r->x + r->w / 2.0), static_cast<Sint16>(r->y + r->h / 2.0), 3,
+                          4, 0x00, 0x00, 0x00, 0xFF);
+
+    } else if (type == BLANK) {
+        //Set color to white
+        SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        //Draw filled rectangle with white color
+        SDL_RenderFillRect(renderer, r);
+
+    } else {
+        std::cerr << "Unknown cell type: " << type << std::endl;
+        return;
     }
 
-    SDL_Rect *r = &cells.at(x).at(y);
-
-    SDL_RenderFillRect(renderer, r);
+    //Set color to transparent black
     SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xB0);
+    //Draw square outline
     SDL_RenderDrawRect(renderer, r);
-
-
 }
 
 void GridGraphicsObject::freeResources() {

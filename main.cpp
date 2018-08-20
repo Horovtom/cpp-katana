@@ -1,9 +1,12 @@
 //
 // Created by lactosis on 25.7.18.
 //
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+//#include <SDL.h>
+//#include <SDL_image.h>
+//#include <SDL_ttf.h>
 #include <iostream>
 #include "ObjectManager.h"
 #include "Timer.h"

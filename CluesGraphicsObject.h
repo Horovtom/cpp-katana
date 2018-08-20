@@ -9,7 +9,7 @@
 #define USED_FONT "/home/lactosis/Documents/Programming/C++/katana/fonts/Anonymous.ttf"
 
 
-#include <SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include "LogicManager.h"
 #include "Coordinate.h"
 #include "Legend.h"

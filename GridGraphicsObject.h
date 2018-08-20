@@ -5,7 +5,9 @@
 #ifndef KATANA_GRIDGRAPHICSOBJECT_H
 #define KATANA_GRIDGRAPHICSOBJECT_H
 
-#include <SDL_system.h>
+#include <SDL2/SDL_system.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
+//#include <SDL_system.h>
 #include "LogicManager.h"
 
 class GridGraphicsObject {
