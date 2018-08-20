@@ -2,6 +2,7 @@
 // Created by lactosis on 24.7.18.
 //
 
+#include <iostream>
 #include "Grid.h"
 
 Grid::Grid(unsigned int sizeX, unsigned int sizeY) {
@@ -23,6 +24,25 @@ void Grid::setCell(unsigned int x, unsigned int y, GridCell val) {
 
 GridCell Grid::getCell(unsigned int x, unsigned int y) {
     return grid.at(y).at(x);
+}
+
+void Grid::cycleCell(int x, int y) {
+    switch (grid.at(y).at(x)) {
+        case BLANK:
+            setCell(x, y, BLACK);
+            break;
+        case BLACK:
+            setCell(x, y, CROSS);
+            break;
+        case CROSS:
+            setCell(x, y, DOT);
+            break;
+        case DOT:
+            setCell(x, y, BLANK);
+            break;
+        default:
+            std::cerr << "Unknown cellType: " << grid.at(y).at(x) << std::endl;
+    }
 }
 
 

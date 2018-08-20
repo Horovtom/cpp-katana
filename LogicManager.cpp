@@ -60,3 +60,7 @@ void LogicManager::createSampleGrid() {
     grid->setCell(0, 2, CROSS);
     grid->setCell(1, 1, DOT);
 }
+
+void LogicManager::cycleCellType(int x, int y) {
+    grid->cycleCell(x, y);
+}

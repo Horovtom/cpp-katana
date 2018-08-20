@@ -89,7 +89,9 @@ void end() {
 }
 
 void handleMouse(SDL_Event *e) {
-    if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
+    if (e->type == SDL_MOUSEBUTTONDOWN
+        //|| e->type == SDL_MOUSEBUTTONUP
+            ) {
         int x, y;
         SDL_GetMouseState(&x, &y);
 

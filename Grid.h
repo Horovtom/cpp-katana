@@ -8,7 +8,7 @@
 #include <vector>
 
 enum GridCell {
-    DOT, CROSS, BLANK, BLACK
+    BLANK, BLACK, CROSS, DOT
 };
 
 class Grid {
@@ -24,6 +24,11 @@ public:
     unsigned int getWidth() { return sizeX; }
 
     unsigned int getHeight() { return sizeY; }
+
+    /**
+     * This will change the cell type to next type in enum GridCell
+     */
+    void cycleCell(int x, int y);
 };
 
 

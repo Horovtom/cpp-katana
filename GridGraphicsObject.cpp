@@ -123,4 +123,5 @@ bool GridGraphicsObject::mouseDown(int x, int y) {
 
 void GridGraphicsObject::clickedOnCell(int x, int y) {
     std::cout << "User clicked on grid cell: " << x << "," << y << std::endl;
+    this->logicManager->cycleCellType(x, y);
 }

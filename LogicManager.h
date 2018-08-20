@@ -30,6 +30,11 @@ public:
     void createSampleLegend();
 
     void createSampleGrid();
+
+    /**
+     * This will switch celltype on specified coorinates
+     */
+    void cycleCellType(int x, int y);
 };
 
 
