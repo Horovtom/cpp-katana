@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include "statics.h"
 #include "GridGraphicsObject.h"
 #include "LogicManager.h"
 #include "Grid.h"
@@ -141,6 +142,8 @@ bool GridGraphicsObject::mouseDown(int x, int y) {
 }
 
 void GridGraphicsObject::clickedOnCell(int x, int y) {
+#ifdef DEBUG_VAR
     std::cout << "User clicked on grid cell: " << x << "," << y << std::endl;
+#endif
     this->logicManager->cycleCellType(x, y);
 }

@@ -2,6 +2,7 @@
 // Created by lactosis on 26.7.18.
 //
 
+#include "statics.h"
 #include "CluesGraphicsObject.h"
 #include "Legend.h"
 
@@ -178,13 +179,21 @@ bool CluesGraphicsObject::mouseDown(int x, int y) {
 }
 
 void CluesGraphicsObject::topCluesClick(int x, int y) {
+#ifdef DEBUG_VAR
     std::cout << "Captured click on top clues: " << x << ", " << y << std::endl;
+#endif
+
+
     this->logicManager->switchTopClueDoneInverse(x, y);
 }
 
 
 void CluesGraphicsObject::leftCluesClick(int x, int y) {
+#ifdef  DEBUG_VAR
     std::cout << "Captured click on left clues: " << x << ", " << y << std::endl;
+#endif
+
+
     this->logicManager->switchLeftClueDoneInverse(x, y);
 }
 
