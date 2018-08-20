@@ -10,6 +10,7 @@
 
 
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
 #include "LogicManager.h"
 #include "Coordinate.h"
 #include "Legend.h"
@@ -79,8 +80,18 @@ public:
 
     bool mouseDown(int x, int y);
 
+    /**
+    * This function notifies logic that clue cell has been clicked.
+    * @param x Column number from left to the right
+    * @param y !! Row number from the bottom to the top !!
+    */
     void topCluesClick(int x, int y);
 
+    /**
+    * This function notifies logic that clue cell has been clicked.
+    * @param x !! Column number from right to the left !!
+    * @param y Row number from the top to the bottom
+    */
     void leftCluesClick(int x, int y);
 };
 

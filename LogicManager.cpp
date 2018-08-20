@@ -64,3 +64,11 @@ void LogicManager::createSampleGrid() {
 void LogicManager::cycleCellType(int x, int y) {
     grid->cycleCell(x, y);
 }
+
+void LogicManager::switchTopClueDoneInverse(int col, int row) {
+    legend->switchTopClueDoneInverse(row, col);
+}
+
+void LogicManager::switchLeftClueDoneInverse(int col, int row) {
+    legend->switchLeftClueDoneInverse(row, col);
+}

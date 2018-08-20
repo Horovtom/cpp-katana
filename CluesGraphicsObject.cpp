@@ -108,17 +108,22 @@ void CluesGraphicsObject::drawCell(unsigned long x, unsigned long y, int number,
 
     SDL_RenderCopy(renderer, texture, size, &a);
 
-    //TODO: IMPLEMENT StrikeThrough
+    if (strikeThrough)
+        SDL_RenderDrawLine(renderer, r->x, r->y, r->x + r->w, r->y + r->h);
 }
 
 void CluesGraphicsObject::drawTopClues(Legend *l) {
     SDL_RenderSetViewport(renderer, &topViewPort);
 
     for (unsigned int x = 0; x < l->getTopWidth(); ++x) {
+        //This is from top to bottom, but we don't know where to start
         std::vector<bool> colDone = l->getTopCluesDone(x);
         std::vector<unsigned int> col = l->getTopClues(x);
-        for (auto y = static_cast<int>(col.size() - 1); y >= 0; --y) {
-            drawCell(x, static_cast<unsigned long>(y), col.at(static_cast<unsigned long>(y)), true, colDone.at(y));
+
+        unsigned long len = col.size() - 1;
+
+        for (unsigned long y = 0; y < col.size(); ++y) {
+            drawCell(x, y, col.at(len - y), true, colDone.at(len - y));
         }
     }
 }
@@ -149,18 +154,17 @@ bool CluesGraphicsObject::mouseDown(int x, int y) {
     //Inner Check
     if (x < this->x + leftWidth && y < this->y + leftHeight + topHeight) {
         //It was in the left clues:
-        cellX = x - this->x;
+        cellX = leftWidth - (x - this->x);
         cellY = y - this->y - topHeight;
         cellX /= cellSize;
         cellY /= cellSize;
 
         leftCluesClick(cellX, cellY);
-        //TODO: IMPLEMENT
     } else if (x < this->x + topWidth + leftWidth && y < this->y + topHeight) {
         //It was in the top clues:
 
         cellX = x - this->x - leftWidth;
-        cellY = y - this->y;
+        cellY = topHeight - (y - this->y);
         cellX /= cellSize;
         cellY /= cellSize;
 
@@ -173,21 +177,16 @@ bool CluesGraphicsObject::mouseDown(int x, int y) {
     return true;
 }
 
-/**
- * Starting from top left corner of clues
- */
 void CluesGraphicsObject::topCluesClick(int x, int y) {
     std::cout << "Captured click on top clues: " << x << ", " << y << std::endl;
-    //TODO: IMPLEMENT
+    this->logicManager->switchTopClueDoneInverse(x, y);
 }
 
-/**
- * Starting from top left corner of clues
- * @param x
- * @param y
- */
+
 void CluesGraphicsObject::leftCluesClick(int x, int y) {
     std::cout << "Captured click on left clues: " << x << ", " << y << std::endl;
-    //TODO: IMPLEMENT
+    this->logicManager->switchLeftClueDoneInverse(x, y);
 }
+
+
 

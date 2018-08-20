@@ -35,6 +35,20 @@ public:
      * This will switch celltype on specified coorinates
      */
     void cycleCellType(int x, int y);
+
+    /**
+     * This will switch topLegendDone on specified cell
+     * @param col Column number numbered from left to right
+     * @param row Row number numbered from bottom to top
+     */
+    void switchTopClueDoneInverse(int col, int row);
+
+    /**
+     * This will switch leftLegendDone on specified cell
+     * @param row Row number numbered from right to left
+     * @param col Column number numbered from top to bottom
+     */
+    void switchLeftClueDoneInverse(int col, int row);
 };
 
 

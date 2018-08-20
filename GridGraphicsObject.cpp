@@ -78,15 +78,15 @@ void GridGraphicsObject::drawCell(int x, int y, GridCell type) {
     } else if (type == CROSS) {
         //Set color to black
         SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
-        int x1, x2, y1, y2;
+        Sint16 x1, x2, y1, y2;
 
         //Calculate first line coords:
         auto offset = static_cast<int>(cellSize / 5.0);
         //TODO: Cache the result somehow so we do not have to calculate this every frame
-        x1 = r->x + offset;
-        y1 = r->y + offset;
-        x2 = r->x + r->w - offset;
-        y2 = r->y + r->h - offset;
+        x1 = static_cast<Sint16>(r->x + offset);
+        y1 = static_cast<Sint16>(r->y + offset);
+        x2 = static_cast<Sint16>(r->x + r->w - offset);
+        y2 = static_cast<Sint16>(r->y + r->h - offset);
 
         thickLineRGBA(renderer, x1, y1, x2, y2, 2, 0x00, 0x00, 0x00, 0xFF);
         thickLineRGBA(renderer, x1, y2, x2, y1, 2, 0x00, 0x00, 0x00, 0xFF);

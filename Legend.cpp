@@ -128,4 +128,23 @@ std::vector<bool> Legend::getLeftCluesDone(unsigned int row) {
     return leftLegendDone.at(row);
 }
 
+void Legend::setTopClueDone(unsigned int row, unsigned int col, bool value) {
+    this->topLegendDone.at(row).at(col) = value;
+}
+
+void Legend::setLeftClueDone(unsigned int row, unsigned int col, bool value) {
+    this->leftLegendDone.at(col).at(row) = value;
+}
+
+void Legend::switchTopClueDoneInverse(unsigned int row, unsigned int col) {
+    int realRow = this->topLegendDone.at(col).size() - 1 - row;
+    this->topLegendDone.at(col).at(realRow) = !this->topLegendDone.at(col).at(realRow);
+}
+
+void Legend::switchLeftClueDoneInverse(unsigned int row, unsigned int col) {
+    int realColumn = this->leftLegendDone.at(row).size() - col - 1;
+
+    this->leftLegendDone.at(row).at(realColumn) = !this->leftLegendDone.at(row).at(realColumn);
+}
+
 

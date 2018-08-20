@@ -105,6 +105,24 @@ public:
     std::vector<bool> getTopCluesDone(unsigned int col);
 
     std::vector<bool> getLeftCluesDone(unsigned int row);
+
+    void setTopClueDone(unsigned int row, unsigned int col, bool value);
+
+    void setLeftClueDone(unsigned int row, unsigned int col, bool value);
+
+    /**
+     * This will switch topLegendDone on specified cell
+     * @param x Column number numbered from left to right
+     * @param y Row number numbered from bottom to top
+     */
+    void switchTopClueDoneInverse(unsigned int row, unsigned int col);
+
+    /**
+     * This will switch leftLegendDone on specified cell
+     * @param x Row number numbered from right to left
+     * @param y Column number numbered from top to bottom
+     */
+    void switchLeftClueDoneInverse(unsigned int row, unsigned int col);
 };
 
 
