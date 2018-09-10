@@ -5,6 +5,7 @@
 #include "UIGraphicsObject.h"
 #include <iostream>
 #include "LogicManager.h"
+#include "Utilities.h"
 
 UIGraphicsObject::UIGraphicsObject(int x, int y, LogicManager *l, SDL_Renderer *renderer, int width,
                                    int height) {
@@ -48,7 +49,7 @@ bool UIGraphicsObject::mouseDown(int x, int y) {
 
     int localX = x - this->x;
     int localY = y - this->y;
-    
+
     if (localX >= buttons[0].x && localY >= buttons[0].y && localX < buttons[0].x + buttonSize &&
         localY < buttons[0].y + buttonSize) {
         //Clicked on button 0:
@@ -75,6 +76,7 @@ void UIGraphicsObject::createMenu() {
 
     targetTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
 
+
     //Switch render target to the texture
     SDL_SetRenderTarget(renderer, targetTexture);
     //Clear the texture with white color
@@ -82,10 +84,7 @@ void UIGraphicsObject::createMenu() {
     SDL_RenderClear(renderer);
 
     //Draw outline
-    thickLineRGBA(renderer, 0, 0, this->width, 0, 2, 0x00, 0x00, 0x00, 0xFF);
-    thickLineRGBA(renderer, this->width, 0, this->width, this->height, 2, 0x00, 0x00, 0x00, 0xFF);
-    thickLineRGBA(renderer, this->width, this->height, 0, this->height, 2, 0x00, 0x00, 0x00, 0xFF);
-    thickLineRGBA(renderer, 0, this->height, 0, 0, 2, 0x00, 0x00, 0x00, 0xFF);
+    drawThickRectangle(renderer, 0, 0, this->width, this->height, 3, COLOR_BLACK);
 
     //Draw buttons
     //Set the color to semi-transparent black
