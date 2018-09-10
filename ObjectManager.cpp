@@ -10,7 +10,7 @@ ObjectManager::ObjectManager(LogicManager *l, SDL_Renderer *renderer) {
     createGameObjects(5, 5);
 
     Coordinate c = clues->getLowerLeftCorner();
-    createUIObjects(c.x, c.y);
+    createUIObjects(c.x, c.y + 10);
 }
 
 ObjectManager::~ObjectManager() {
@@ -46,7 +46,7 @@ void ObjectManager::createGameObjects(int x, int y) {
 }
 
 void ObjectManager::createUIObjects(int x, int y) {
-    ui = new UIGraphicsObject(x, y, logicManager, renderer, 200, 100);
+    ui = new UIGraphicsObject(x, y, logicManager, renderer, 200);
 }
 
 void ObjectManager::update() {

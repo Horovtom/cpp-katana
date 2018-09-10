@@ -25,6 +25,8 @@ void GridGraphicsObject::calculateDimensions() {
     Grid *grid = logicManager->getGridRef();
     this->widthCells = grid->getWidth();
     this->heightCells = grid->getHeight();
+    this->width = widthCells * cellSize;
+    this->height = heightCells * cellSize;
 
 }
 
@@ -125,8 +127,8 @@ GridGraphicsObject::~GridGraphicsObject() {
 }
 
 bool GridGraphicsObject::mouseDown(int x, int y) {
-    if (x < this->x || y < this->y || x > this->x + cellSize * widthCells ||
-        y > this->y + cellSize * heightCells)
+    if (x < this->x || y < this->y || x > this->x + this->width ||
+        y > this->y + this->height)
         return false;
 
     // These are the cell coordinates of the clicked cell:

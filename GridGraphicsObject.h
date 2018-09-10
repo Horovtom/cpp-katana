@@ -16,6 +16,7 @@ private:
      * Position of the top left corner of this grid object
      */
     int x, y;
+    int width, height;
 
     /**
      * Number of cells in respective directions

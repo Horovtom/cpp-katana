@@ -26,6 +26,6 @@ target_link_libraries(UnitTest ${SDL2_LIBRARIES})
 add_executable(Katana main.cpp Grid.cpp Grid.h Legend.cpp Legend.h ObjectManager.cpp ObjectManager.h
         LogicManager.cpp LogicManager.h CluesGraphicsObject.cpp CluesGraphicsObject.h UIGraphicsObject.cpp
         UIGraphicsObject.h GridGraphicsObject.cpp GridGraphicsObject.h LTexture.cpp LTexture.h Coordinate.cpp
-        Coordinate.h NumbersTextures.cpp NumbersTextures.h Timer.cpp Timer.h statics.h)
+        Coordinate.h NumbersTextures.cpp NumbersTextures.h Timer.cpp Timer.h statics.h Vector2.cpp Vector2.h)
 #target_link_libraries(Katana ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
 target_link_libraries(Katana ${SDL2_LIBRARIES})

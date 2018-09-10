@@ -6,8 +6,8 @@
 #include <iostream>
 #include "LogicManager.h"
 
-UIGraphicsObject::UIGraphicsObject(int x, int y, LogicManager *l, SDL_Renderer *renderer, int width = 100,
-                                   int height = 50) {
+UIGraphicsObject::UIGraphicsObject(int x, int y, LogicManager *l, SDL_Renderer *renderer, int width,
+                                   int height) {
     this->renderer = renderer;
     this->logicManager = l;
     this->x = x;
@@ -15,8 +15,14 @@ UIGraphicsObject::UIGraphicsObject(int x, int y, LogicManager *l, SDL_Renderer *
     this->width = width;
     this->height = height;
 
-    createMenu();
     //TODO: IMPLEMENT
+    //Initialize buttons positions:
+    this->buttons[0].x = 5;
+    this->buttons[0].y = 5;
+    this->buttons[1].x = this->buttons[0].x + this->buttonSize + 3;
+    this->buttons[1].y = 5;
+
+    createMenu();
 }
 
 void UIGraphicsObject::updateInput() {
@@ -25,7 +31,6 @@ void UIGraphicsObject::updateInput() {
 
 void UIGraphicsObject::updateOuptut() {
     drawMenu();
-//TODO: IMPLEMENT
 }
 
 void UIGraphicsObject::freeResources() {
@@ -39,8 +44,24 @@ UIGraphicsObject::~UIGraphicsObject() {
 }
 
 bool UIGraphicsObject::mouseDown(int x, int y) {
-    //TODO: IMPLEMENT
-    return false;
+    if (x < this->x || x > this->x + this->width || y < this->y || y > this->y + this->height) return false;
+
+    int localX = x - this->x;
+    int localY = y - this->y;
+    
+    if (localX >= buttons[0].x && localY >= buttons[0].y && localX < buttons[0].x + buttonSize &&
+        localY < buttons[0].y + buttonSize) {
+        //Clicked on button 0:
+        std::cout << "Clicked on button 0: " << std::endl;
+
+    }
+
+    if (localX >= buttons[1].x && localY >= buttons[1].y && localX < buttons[1].x + buttonSize &&
+        localY < buttons[1].y + buttonSize) {
+        //Clicked on button 1:
+        std::cout << "Clicked on button 1: " << std::endl;
+    }
+    return true;
 }
 
 void UIGraphicsObject::createMenu() {
@@ -60,13 +81,20 @@ void UIGraphicsObject::createMenu() {
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 
-    //Set the color to semi-transparent black
-    SDL_SetRenderDrawColor(renderer, 0x20, 0x20, 0x20, 0xA0);
+    //Draw outline
+    thickLineRGBA(renderer, 0, 0, this->width, 0, 2, 0x00, 0x00, 0x00, 0xFF);
+    thickLineRGBA(renderer, this->width, 0, this->width, this->height, 2, 0x00, 0x00, 0x00, 0xFF);
+    thickLineRGBA(renderer, this->width, this->height, 0, this->height, 2, 0x00, 0x00, 0x00, 0xFF);
+    thickLineRGBA(renderer, 0, this->height, 0, 0, 2, 0x00, 0x00, 0x00, 0xFF);
 
-    //Draw stuff
-    SDL_Rect rect = {12, 0, 25, 25};
-    SDL_RenderFillRect(renderer, &rect);
-    SDL_RenderDrawLine(renderer, 112, 160, 10, 50);
+    //Draw buttons
+    //Set the color to semi-transparent black
+    SDL_SetRenderDrawColor(renderer, 0x20, 0x20, 0x20, 0xFF);
+
+    SDL_Rect butt1 = {buttons[0].x, buttons[0].y, this->buttonSize, this->buttonSize};
+    SDL_RenderFillRect(renderer, &butt1);
+    SDL_Rect butt2 = {buttons[1].x, buttons[1].y, this->buttonSize, this->buttonSize};
+    SDL_RenderDrawRect(renderer, &butt2);
 
     //Switch render target back to the default canvas
     SDL_SetRenderTarget(renderer, nullptr);
