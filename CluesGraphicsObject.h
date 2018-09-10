@@ -93,6 +93,8 @@ public:
     * @param y Row number from the top to the bottom
     */
     void leftCluesClick(int x, int y);
+
+    Coordinate getLowerLeftCorner();
 };
 
 

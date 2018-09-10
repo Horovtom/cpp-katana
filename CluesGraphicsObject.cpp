@@ -197,5 +197,12 @@ void CluesGraphicsObject::leftCluesClick(int x, int y) {
     this->logicManager->switchLeftClueDoneInverse(x, y);
 }
 
+Coordinate CluesGraphicsObject::getLowerLeftCorner() {
+    Coordinate c;
+    c.x = x;
+    c.y = leftHeight + y + topHeight;
+    return c;
+}
+
 
 
