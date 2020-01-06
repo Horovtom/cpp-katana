@@ -18,10 +18,8 @@ int runWithGraphics(int argc, char **argv, Game *game) {
 }
 
 int main(int argc, char **argv) {
-
-    Game *g = new Game();
+    Game *g = new Game("/home/lactosis/Documents/Programming/C++/cpp-katana/resources/small.pic");
     int res = runWithGraphics(argc, argv, g);
     delete g;
     return res;
-
 }

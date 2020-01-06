@@ -4,8 +4,7 @@
 
 
 #include <tests/Test.h>
-#include "testGrid.cpp"
-#include "testMinMax.cpp"
+#include "TestGrid.cpp"
 
 int main(int argc, char *argv[]) {
     Test test;

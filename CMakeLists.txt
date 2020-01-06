@@ -19,6 +19,8 @@ include_directories(
 
 set(KATANA_SOURCES
         src/game/logic/Game.cpp
+        src/game/logic/Clues.cpp
+        src/game/logic/Grid.cpp
         )
 
 set(GRAPHICS_SOURCES

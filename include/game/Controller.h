@@ -23,6 +23,8 @@ public:
 private:
     Game *game;
     GameWindow *window;
+
+    void updateTopClues();
 };
 
 

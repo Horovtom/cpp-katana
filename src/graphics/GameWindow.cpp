@@ -19,6 +19,7 @@ GameWindow::GameWindow() {
     show_all_children();
 }
 
+
 bool GameWindow::on_key_press_event(GdkEventKey *key_event) {
     //GDK_KEY_1 -> the '1' key
     //GDK_KEY_2 -> the '2' key
@@ -48,6 +49,10 @@ bool GameWindow::on_key_press_event(GdkEventKey *key_event) {
 //    }
 //    //returning true, cancels the propagation of the event
 //    queue_draw();
+
+    if (key_event->keyval == GDK_KEY_space)
+        controller->spacePressed();
+    queue_draw();
     return true;
 }
 
@@ -60,4 +65,11 @@ void GameWindow::registerController(Controller *c) {
     }
     controller = c;
     controller->update();
+}
+
+void GameWindow::setGameData(const std::vector<std::vector<GridField>> &grid,
+                             const std::vector<const std::vector<std::pair<int, bool>> *> &leftClues,
+                             const std::vector<const std::vector<std::pair<int, bool>> *> &topClues) {
+    area.setGameData(grid, leftClues, topClues);
+
 }

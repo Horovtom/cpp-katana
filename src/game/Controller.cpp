@@ -9,6 +9,7 @@ Controller::Controller(Game *g, GameWindow *w) {
     window = w;
     game = g;
     w->registerController(this);
+    window->setGameData(game->getGridReference(), game->getLeftCluesReference(), game->getTopCluesReference());
 }
 
 void Controller::update() {
@@ -23,4 +24,6 @@ void Controller::onUserAction() {
 
 void Controller::spacePressed() {
     // TODO:
+    std::cout << "Space PRESSED" << std::endl;
+    game->addClue();
 }

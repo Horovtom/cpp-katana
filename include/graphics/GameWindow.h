@@ -7,6 +7,7 @@
 
 #include <gtkmm.h>
 #include <graphics/GameArea.h>
+#include <game/GridField.h>
 
 class Controller;
 
@@ -19,9 +20,15 @@ public:
 
     void registerController(Controller *controller);
 
+
+    void setGameData(const std::vector<std::vector<GridField>> &grid,
+                     const std::vector<const std::vector<std::pair<int, bool>> *> &leftClues,
+                     const std::vector<const std::vector<std::pair<int, bool>> *> &topClues);
+
 private:
     //Override default signal handler:
     bool on_key_press_event(GdkEventKey *event) override;
+
 
     Controller *controller = nullptr;
     GameArea area;
